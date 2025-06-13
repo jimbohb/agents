@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2024 Month Days</title>
+    <!-- Linking to Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Linking Chart.js for charting -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        canvas {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Days in Each Month of 2024</h1>
+    <table>
+        <tr>
+            <th>January</th>
+            <th>February</th>
+            <th>March</th>
+            <th>April</th>
+            <th>May</th>
+            <th>June</th>
+            <th>July</th>
+            <th>August</th>
+            <th>September</th>
+            <th>October</th>
+            <th>November</th>
+            <th>December</th>
+        </tr>
+        <tr id="days-row">
+            <!-- Placeholder for days, will be filled using JavaScript -->
+        </tr>
+    </table>
+
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Generating random days for each month
+        const days = Array.from({ length: 12 }, () => Math.floor(Math.random() * 31) + 1);
+        const daysRow = document.getElementById('days-row');
+
+        // Inserting days into the table
+        days.forEach(day => {
+            const td = document.createElement('td');
+            td.textContent = day;
+            daysRow.appendChild(td);
+        });
+
+        // Chart.js Configuration
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'January', 'February', 'March', 'April', 
+                    'May', 'June', 'July', 'August', 
+                    'September', 'October', 'November', 'December'
+                ],
+                datasets: [{
+                    label: 'Number of test cases',
+                    data: days,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
